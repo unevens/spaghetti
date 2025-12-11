@@ -16,3 +16,6 @@
 [submodule "ImTimeline"]
 	path = ImTimeline
 	url = https://github.com/unevens/ImTimeline
+[submodule "imgui-node-editor"]
+	path = imgui-node-editor
+	url = https://github.com/unevens/imgui-node-editor
