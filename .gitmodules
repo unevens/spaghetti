@@ -1,0 +1,18 @@
+[submodule "ImGuiColorTextEdit"]
+	path = ImGuiColorTextEdit
+	url = https://github.com/unevens/ImGuiColorTextEdit
+[submodule "imgui"]
+	path = imgui
+	url = https://github.com/unevens/imgui
+[submodule "stb"]
+	path = stb
+	url = https://github.com/unevens/stb
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/glfw/glfw
+[submodule "ImNodeFlow"]
+	path = ImNodeFlow
+	url = https://github.com/unevens/ImNodeFlow
+[submodule "ImTimeline"]
+	path = ImTimeline
+	url = https://github.com/unevens/ImTimeline
