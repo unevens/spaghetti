@@ -19,3 +19,6 @@
 [submodule "imgui-node-editor"]
 	path = imgui-node-editor
 	url = https://github.com/unevens/imgui-node-editor
+[submodule "glfw3webgpu"]
+	path = glfw3webgpu
+	url = https://github.com/unevens/glfw3webgpu

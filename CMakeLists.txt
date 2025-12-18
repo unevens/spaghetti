@@ -4,10 +4,9 @@ project(Spaghetti)
 
 set(CMAKE_CXX_STANDARD            20)
 set(CMAKE_CXX_STANDARD_REQUIRED   YES)
-# set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 add_subdirectory(webgpu)
-add_compile_definitions(IMGUI_IMPL_WEBGPU_BACKEND_WGPU)
+add_compile_definitions(IMGUI_IMPL_WEBGPU_BACKEND_DAWN)
 add_compile_definitions(IMGUI_DEFINE_MATH_OPERATORS)
 
 set(node_flow_dir "ImNodeFlow")
@@ -54,7 +53,9 @@ else()
     target_link_options(glfw INTERFACE -sUSE_GLFW=3)
 endif()
 
-target_link_libraries(SpaghettiApp PRIVATE webgpu glfw)
+add_subdirectory(glfw3webgpu)
+
+target_link_libraries(SpaghettiApp PRIVATE webgpu glfw glfw3webgpu)
 target_copy_webgpu_binaries(SpaghettiApp)
 
 if (XCODE)
