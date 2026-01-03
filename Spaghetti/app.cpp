@@ -1,3 +1,9 @@
+/*
+ * Part of Spaghetti.
+ * Copyright 2025 Dario Mambro.
+ * Distriuted under the GNU Affero General Public License.
+ */
+
 #include "App.h"
 
 #include "imgui_impl_glfw.h"

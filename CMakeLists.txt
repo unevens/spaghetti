@@ -1,9 +1,15 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.5)
 
 project(Spaghetti)
 
 set(CMAKE_CXX_STANDARD            20)
 set(CMAKE_CXX_STANDARD_REQUIRED   YES)
+
+if (MSVC)
+  add_compile_options(/bigobj)
+else ()
+  add_compile_options(-Wa,-mbig-obj)
+endif ()
 
 add_subdirectory(webgpu)
 add_compile_definitions(IMGUI_IMPL_WEBGPU_BACKEND_DAWN)
@@ -33,6 +39,14 @@ set(imgui_backend_dir "imgui/backends")
 set(imgui_backend "${imgui_backend_dir}/imgui_impl_glfw.h" "${imgui_backend_dir}/imgui_impl_glfw.cpp" "${imgui_backend_dir}/imgui_impl_wgpu.h" "${imgui_backend_dir}/imgui_impl_wgpu.cpp")
 source_group("${imgui_backend_dir}" FILES ${imgui_backend})
 
+set(chai_dir "ChaiScript")
+file(GLOB_RECURSE chai CONFIGURE_DEPENDS 
+	${chai_dir}/**.cpp
+	${chai_dir}/**/**.cpp	
+	${chai_dir}/**.hpp
+	${chai_dir}/**/**.hpp)
+source_group("${chai_dir}" FILES ${chai})
+
 set(spaghetti_dir "Spaghetti")
 file(GLOB_RECURSE spaghetti CONFIGURE_DEPENDS
 	${spaghetti_dir}/**.cpp
@@ -43,8 +57,8 @@ file(GLOB_RECURSE spaghetti CONFIGURE_DEPENDS
 	${spaghetti_dir}/**/**.hpp)
 source_group("${spaghetti_dir}" FILES ${spaghetti})
 
-add_executable(SpaghettiApp ${spaghetti} ${imgui} ${imgui_backend} ${node_editor} ${text_editor} ${timeline} ${node_flow})
-target_include_directories(SpaghettiApp PRIVATE "${spaghetti_dir}" "${imgui_dir}" "${imgui_backend_dir}" "${text_editor_dir}" "${node_flow_dir}/include/" "stb" "${timeline_dir}" "${node_editor_dir}")
+add_executable(SpaghettiApp ${spaghetti} ${imgui} ${imgui_backend} ${node_editor} ${text_editor} ${timeline} ${node_flow} ${chai})
+target_include_directories(SpaghettiApp PRIVATE "${spaghetti_dir}" "${imgui_dir}" "${imgui_backend_dir}" "${text_editor_dir}" "${node_flow_dir}/include/" "stb" "${timeline_dir}" "${node_editor_dir}" "${chai_dir}")
 
 if (NOT EMSCRIPTEN)
     add_subdirectory(glfw)
@@ -64,6 +78,7 @@ if (XCODE)
         XCODE_SCHEME_ENABLE_GPU_FRAME_CAPTURE_MODE "Metal"
     )
 endif()
+
 
 # if (MSVC)
 #     target_compile_options(SpaghettiApp PRIVATE /W4)

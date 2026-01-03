@@ -1,3 +1,9 @@
+/*
+ * Part of Spaghetti.
+ * Copyright 2025 Dario Mambro.
+ * Distriuted under the GNU Affero General Public License.
+ */
+
 #pragma once
 
 #include "webgpu/webgpu-raii.hpp"
@@ -6,7 +12,7 @@
 #include <array>
 #include <functional>
 #include <memory>
-
+#include <vector>
 
 class App final {
 
@@ -60,4 +66,3 @@ inline wgpu::Device Gpu() {
 inline wgpu::Queue GpuQueue() {
   return App::Get().GetQueue();
 }
-
